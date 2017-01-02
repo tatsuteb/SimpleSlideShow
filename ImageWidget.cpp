@@ -15,6 +15,8 @@ ImageWidget::ImageWidget(QWidget *parent) :
 	QPalette p = palette();
 	p.setColor(QPalette::Background, Qt::black);
 	setPalette(p);
+
+	setWindowFlags(Qt::WindowStaysOnTopHint);
 }
 
 ImageWidget::~ImageWidget()

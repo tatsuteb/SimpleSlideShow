@@ -22,7 +22,6 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->setupUi(this);
 
 	setupDataOnUi();
-
 	setupConnection();
 }
 
@@ -52,7 +51,7 @@ void MainWindow::setupConnection()
 	connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::open);
 	connect(ui->actionSave, &QAction::triggered, this, &MainWindow::save);
 	connect(ui->actionSaveAs, &QAction::triggered, this, &MainWindow::saveAs);
-	connect(ui->actionQuit, &QAction::triggered, this, &MainWindow::quitApp);
+	connect(ui->actionQuit, &QAction::triggered, qApp, &QApplication::quit);
 
 	connect(m_timer, &QTimer::timeout, this, &MainWindow::slideshowTimerEvent);
 	connect(m_imageWidget, &ImageWidget::escapeKeyPressed, this, &MainWindow::stopSlideshow);
@@ -174,11 +173,6 @@ void MainWindow::open()
 	setupDataOnUi();
 
 	m_openedFilename = filename;
-}
-
-void MainWindow::quitApp()
-{
-	close();
 }
 
 void MainWindow::save()
@@ -345,4 +339,9 @@ void MainWindow::on_checkBox_random_toggled(bool checked)
 void MainWindow::on_checkBox_fullscreen_toggled(bool checked)
 {
 	m_slideshowSetting->setFullscreenState(checked);
+}
+
+void MainWindow::closeEvent(QCloseEvent *)
+{
+	qApp->quit();
 }
