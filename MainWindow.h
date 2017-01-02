@@ -21,6 +21,9 @@ class MainWindow : public QMainWindow
 		explicit MainWindow(QWidget *parent = 0);
 		~MainWindow();
 
+	protected:
+		void closeEvent(QCloseEvent *);
+
 	private:
 		Ui::MainWindow *ui;
 		QSharedPointer<SlideshowSetting> m_slideshowSetting;
@@ -45,7 +48,6 @@ class MainWindow : public QMainWindow
 		void open();	// JSON形式か、バイナリ形式で書き出したデータを読み込む
 		void save();	// JSON形式か、バイナリ形式でプレイリストとスライドショーの設定を保存
 		void saveAs();
-		void quitApp();
 
 		bool setNextImage();
 		void slideshowTimerEvent();
